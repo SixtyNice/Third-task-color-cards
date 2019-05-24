@@ -66,8 +66,7 @@ function Game() {
             }
             if (arr.length == 2) {
 
-                // if (arr[0].classList.contains(colors[index]) != arr[1].classList.contains(colors[index])) 
-                if (arr[0] == arr[1]) {
+                if (arr[0].classList.contains(colors[index]) != arr[1].classList.contains(colors[index])) {
                     setTimeout(function () {
                         arr[0].classList.add("inactive");
                         arr[1].classList.add("inactive");
