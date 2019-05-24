@@ -11,6 +11,7 @@ function setup() {
 const playBoard = document.querySelector('.play-board');
 const colors = ["red", "green", "purple", "blue", "gray", "yellow", "orange", "aqua", "red", "green", "purple", "blue", "gray", "yellow", "orange", "aqua"];
 
+document.querySelector('.start-btn').addEventListener('click', setup);
 //Рисуем клетки
 function draw() {
     for (let i = 0; i < 16; i++) {
@@ -26,10 +27,11 @@ function shuffleColor() {
     colors.sort(() => (Math.random() - 0.5));
     console.log(colors);
 }
-let cards = document.querySelectorAll('.card');
+
 
 //Красим карты и делаем их неактивными 
 function addColor() {
+    let cards = document.querySelectorAll('.card');
     cards.forEach((e, index) => {
         e.classList.add(`${colors[index]}`, 'inactive')
 
@@ -40,6 +42,7 @@ function addColor() {
 
 //Ресетим класс кард, что при многократном нажатии на кнопу старт цвета не добавлялись к существующим
 function reset() {
+    let cards = document.querySelectorAll('.card');
     cards.forEach((e) => {
         e.classList = "card";
     })
@@ -49,7 +52,7 @@ function reset() {
 function Game() {
     let arr = [];
     let newArr = [];
-    // let cards = document.querySelectorAll(".card");
+    let cards = document.querySelectorAll(".card");
     cards.forEach((e, index) => {
         e.addEventListener('click', function () {
             let flag = true;
@@ -59,10 +62,12 @@ function Game() {
                 arr.forEach((e) => {
                     e.classList.add("inactive");
                 })
+                arr = [];
             }
             if (arr.length == 2) {
 
-                if (arr[0].classList.contains(colors[index]) != arr[1].classList.contains(colors[index])) {
+                // if (arr[0].classList.contains(colors[index]) != arr[1].classList.contains(colors[index])) 
+                if (arr[0] == arr[1]) {
                     setTimeout(function () {
                         arr[0].classList.add("inactive");
                         arr[1].classList.add("inactive");
@@ -76,14 +81,12 @@ function Game() {
                 }
             }
             if (newArr.length == 8) {
-                setTimeout(function(){
+                setTimeout(function () {
                     alert("You win");
-                },100);
-                
+                }, 100);
+
                 newArr = [];
             }
         });
     });
 }
-
-document.querySelector('.start-btn').addEventListener('click', setup);
